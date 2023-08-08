@@ -3,10 +3,11 @@
 ## Resources
 
 #### Read or watch
-
-* [](https://intranet.alxswe.com/concepts/350)
+* [Thompson shell](https://en.wikipedia.org/wiki/Thompson_shell)
+* [Unix Shell](https://en.wikipedia.org/wiki/Unix_shell)
+* [Ken Thompson](https://en.wikipedia.org/wiki/Ken_Thompson)
 ## Learning Objectives
-
+* At the end of this project, you are expected to be able to explain to anyone, without the help of Google.
 ### General
 
 * Who designed and implemented the original Unix operating system
