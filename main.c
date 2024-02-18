@@ -44,33 +44,44 @@ int main() {
         tokens[count] = NULL;
         if (count > 0)
         {
+            
             command = find_command_path(tokens[0]);
-            if (command != NULL)
+            if (execute_builtin(tokens, line) == 0)
             {
-                pid = fork();
-                if (pid < 0)
+                if (command != NULL)
                 {
-                    perror("fork");
-                    exit(EXIT_FAILURE);
-                } 
-                else if (pid == 0) 
+                    pid = fork();
+                    if (pid < 0)
+                    {
+                        perror("fork");
+                        exit(EXIT_FAILURE);
+                    } 
+                    else if (pid == 0) 
+                    {
+                        execve(command, tokens, NULL);
+                        perror("execve");
+                        exit(EXIT_FAILURE);
+                    } 
+                    else 
+                    {
+                        wait(NULL);
+                    }
+                }
+                else
                 {
-                    execve(command, tokens, NULL);
-                    perror("execve");
-                    exit(EXIT_FAILURE);
-                } 
-                else 
-                {
-                    wait(NULL);
+                    perror(command);
                 }
             }
+            
+            
         }
         for (i = 0; i < count; i++) 
         {
             free(tokens[i]);
         }
         free(tokens);
-        free(command);
+        if (command != NULL)
+            free(command);
     }
     
     free(line);
