@@ -13,7 +13,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-#define MAX_TOKEN 64
+#define MAX_TOKEN 128
 #define MAX_PATH_LENGTH 1024
 extern char **environ;
 

@@ -10,7 +10,6 @@ char *find_command_path(char *command)
         return strdup(command);
     }
     if (path == NULL) {
-        fprintf(stderr, "PATH environment variable is not set\n");
         return NULL;
     }
 

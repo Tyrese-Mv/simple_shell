@@ -1,12 +1,14 @@
 #include "shell.h"
 
 
-int main() {
-    int count, i;
+int main(int ac, char **av) {
+    
+    int count, i, exit_status = 0;
     pid_t pid;
     size_t len = 0;
     ssize_t read;
     char *line = NULL, **tokens, *token, *command = NULL;
+    (void)ac;
 
     while (1)
     {
@@ -69,7 +71,8 @@ int main() {
                 }
                 else
                 {
-                    perror(command);
+                    fprintf(stderr,"%s: 1: %s: not found\n",av[0], line);
+                    exit_status = 127;
                 }
             }
             
@@ -86,5 +89,5 @@ int main() {
     
     free(line);
     
-    return 0;
+    return exit_status;
 }
