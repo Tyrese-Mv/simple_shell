@@ -19,6 +19,8 @@ extern char **environ;
 
 char *find_command_path(char *command);
 int execute_builtin(char **args, char *command);
+char **tokenise(char *userInput, int *count);
+int execute_command(char **tokens, char **av ,char *userInput);
 
 
 
