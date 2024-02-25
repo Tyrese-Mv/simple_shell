@@ -20,20 +20,20 @@ int execute_command(char **tokens, char **av, char *userInput)
             if (pid < 0)
             {
                 perror("fork");
-                exit(EXIT_FAILURE);
+                exit_status = 1;
             } 
             else if (pid == 0) 
             {
                 execve(command, tokens, NULL);
                 perror("execve");
-                exit(EXIT_FAILURE);
+                exit_status = 1;
             } 
             else 
                 wait(NULL);
         }
         else
         {
-            fprintf(stderr,"%s: 1: %s: not found\n",av[0], userInput);
+            error_msg(av, userInput);
             exit_status = 127;
         }
     }

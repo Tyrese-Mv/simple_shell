@@ -21,7 +21,9 @@ char *find_command_path(char *command)
     token = strtok(path_copy, ":");
     while (token != NULL) {
         char full_path[MAX_PATH_LENGTH];
-        snprintf(full_path, sizeof(full_path), "%s/%s", token, command);
+        strcpy(full_path, token);
+        strcat(full_path, "/");
+        strcat(full_path, command);
         if (access(full_path, X_OK) == 0) {
 
             free(path_copy);

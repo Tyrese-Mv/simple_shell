@@ -21,6 +21,9 @@ char *find_command_path(char *command);
 int execute_builtin(char **args, char *command);
 char **tokenise(char *userInput, int *count);
 int execute_command(char **tokens, char **av ,char *userInput);
+void error_msg(char **av, char *userinput);
+int count_tokens(char **tokens);
+
 
 
 

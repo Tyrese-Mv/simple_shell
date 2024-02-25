@@ -12,7 +12,7 @@ char **tokenise(char *userInput, int *count)
     *count = 0;
     tokens = (char **)malloc(sizeof(char *) * (MAX_TOKEN+1));
     if (tokens == NULL) {
-        fprintf(stderr, "Memory allocation failed\n");
+        perror("Memory allocation failed\n");
         return NULL;
     }
     counter = *count;
@@ -21,7 +21,7 @@ char **tokenise(char *userInput, int *count)
     {
         tokens[counter] = strdup(token);
         if (tokens[counter] == NULL) {
-            fprintf(stderr, "Memory allocation failed\n");
+            perror("Memory allocation failed");
             for (i = 0; i < counter; i++) {
                 free(tokens[i]);
             }

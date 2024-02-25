@@ -57,9 +57,14 @@ void builtin_env(char **args, char *command)
 
 void builtin_exit(char **args, char *command)
 {
-    int i = 0;
+    int i = 0, exit_status = 0;
     if (strcmp(args[0], "exit") == 0)
     {
+		if (count_tokens(args) == 2)
+		{
+			exit_status = atoi(args[1]);
+		}
+
         while (args[i] != NULL)
         {
             free(args[i]);
@@ -67,7 +72,7 @@ void builtin_exit(char **args, char *command)
         }
         free(args);
         free(command);
-        exit(0);
+        exit(exit_status);
     }
         
 }
