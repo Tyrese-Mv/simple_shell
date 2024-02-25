@@ -21,8 +21,11 @@ char *find_command_path(char *command);
 int execute_builtin(char **args, char *command);
 char **tokenise(char *userInput, int *count);
 int execute_command(char **tokens, char **av ,char *userInput);
+
+/**Miscellaneous*/
 void error_msg(char **av, char *userinput);
 int count_tokens(char **tokens);
+int _setenv(const char *name, const char *value, int overwrite);
 
 
 
@@ -30,6 +33,9 @@ int count_tokens(char **tokens);
 /**BUILTIN FUNCTIONS*/
 void builtin_env(char **args, char *command);
 void builtin_exit(char **args, char *command);
+void builtin_setenv(char **args, char *command);
+void builtin_unsetenv(char **args, char *command);
+
 /**
  * * struct builtins - strcuture for builtin functions
  * * @command: command

@@ -14,6 +14,8 @@ int execute_builtin(char **tokens, char *command)
 	BuiltinCommand builtins[] = {
 		{ "env", builtin_env},
         { "exit", builtin_exit},
+		{ "setenv", builtin_setenv},
+		{ "unsetenv", builtin_unsetenv},
 		{ NULL, NULL }
 	};
     if (tokens == NULL || tokens[0] == NULL)
@@ -75,4 +77,29 @@ void builtin_exit(char **args, char *command)
         exit(exit_status);
     }
         
+}
+
+
+void builtin_setenv(char **args, char *command)
+{
+	(void)command;
+	int count = count_tokens(args);
+
+	if (args[1] == NULL || args[2] == NULL || count > 3)
+		write(STDERR_FILENO, "setenv\n", 7);
+	else
+		if (setenv(args[1], args[2], 1) == -1)
+			perror("setenv");
+}
+
+void builtin_unsetenv(char **args, char *command)
+{
+	(void)command;
+	int count = count_tokens(args);
+
+	if (args[1] == NULL || count > 2)
+		write(STDERR_FILENO, "unsetenv\n", 9);
+	else
+		if (unsetenv(args[1]) == -1) 
+			perror("unsetenv");
 }
