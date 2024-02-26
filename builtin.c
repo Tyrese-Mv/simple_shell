@@ -127,10 +127,7 @@ void builtin_cd(char **args, char *command)
 					write(STDOUT_FILENO,"\n", 1);
 			}
 			else
-			{
-				printf("here");
 				perror("cd");
-			}
 		}
 		else
 			if (chdir(args[1]) == -1)
