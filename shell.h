@@ -20,7 +20,7 @@ extern char **environ;
 char *find_command_path(char *command);
 int execute_builtin(char **args, char *command);
 char **tokenise(char *userInput, int *count);
-int execute_command(char **tokens, char **av ,char *userInput);
+int execute_command(char **tokens, char **av, char *userInput);
 
 /**Miscellaneous*/
 void error_msg(char **av, char *userinput);
@@ -37,10 +37,10 @@ void builtin_setenv(char **args, char *command);
 void builtin_unsetenv(char **args, char *command);
 void builtin_cd(char **args, char *command);
 /**
- * * struct builtins - strcuture for builtin functions
- * * @command: command
- * * @functions: builtin functions
- * */
+ * struct builtins - strcuture for builtin functions
+ * @command: command
+ * @functions: builtin functions
+ */
 struct builtins
 {
 		const char *command;
