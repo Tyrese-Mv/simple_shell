@@ -35,7 +35,7 @@ void builtin_env(char **args, char *command);
 void builtin_exit(char **args, char *command);
 void builtin_setenv(char **args, char *command);
 void builtin_unsetenv(char **args, char *command);
-
+void builtin_cd(char **args, char *command);
 /**
  * * struct builtins - strcuture for builtin functions
  * * @command: command

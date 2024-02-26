@@ -16,6 +16,7 @@ int execute_builtin(char **tokens, char *command)
         { "exit", builtin_exit},
 		{ "setenv", builtin_setenv},
 		{ "unsetenv", builtin_unsetenv},
+		{ "cd", builtin_cd},
 		{ NULL, NULL }
 	};
     if (tokens == NULL || tokens[0] == NULL)
@@ -82,9 +83,10 @@ void builtin_exit(char **args, char *command)
 
 void builtin_setenv(char **args, char *command)
 {
+	int count;
 	(void)command;
-	int count = count_tokens(args);
-
+	
+	count = count_tokens(args);
 	if (args[1] == NULL || args[2] == NULL || count > 3)
 		write(STDERR_FILENO, "setenv\n", 7);
 	else
@@ -94,12 +96,46 @@ void builtin_setenv(char **args, char *command)
 
 void builtin_unsetenv(char **args, char *command)
 {
+	int count;
 	(void)command;
-	int count = count_tokens(args);
 
+	count = count_tokens(args);
 	if (args[1] == NULL || count > 2)
 		write(STDERR_FILENO, "unsetenv\n", 9);
 	else
 		if (unsetenv(args[1]) == -1) 
 			perror("unsetenv");
+}
+
+void builtin_cd(char **args, char *command)
+{
+	int count;
+	char buffer[MAX_PATH_LENGTH];
+	(void)command;
+
+	count = count_tokens(args);
+	if (count == 1)
+		chdir(getenv("HOME"));
+	else if (count == 2)
+	{
+		if (strcmp(args[1],"-") == 0)
+		{
+			if (chdir("..") != -1)
+			{
+				if (getcwd(buffer, sizeof(buffer)) != NULL)
+                	write(STDOUT_FILENO, buffer, strlen(buffer));
+					write(STDOUT_FILENO,"\n", 1);
+			}
+			else
+			{
+				printf("here");
+				perror("cd");
+			}
+		}
+		else
+			if (chdir(args[1]) == -1)
+				perror("cd");
+	}
+	else
+		perror("cd");
 }

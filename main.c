@@ -6,13 +6,17 @@ int main(int ac, char **av) {
     int count, i, exit_status = 0;
     size_t len = 0;
     ssize_t read;
-    char *line = NULL, **tokens;
+    char *line = NULL, **tokens, buffer[MAX_PATH_LENGTH];
     (void)ac;
 
     while (1)
     {
         if (isatty(STDIN_FILENO) == 1)
-            write(STDOUT_FILENO, "$ ", 2);
+            if (getcwd(buffer, sizeof(buffer)) != NULL)
+            {
+                write(STDOUT_FILENO, buffer, strlen(buffer));
+                write(STDOUT_FILENO, "$ ", 2);
+            }
         read = getline(&line, &len, stdin);
         if (read == -1)
             break;
